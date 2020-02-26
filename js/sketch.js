@@ -1,12 +1,18 @@
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowWidth);
   background(0);
   noStroke();
 }
 
 function draw() {
-  fill(255);
-  rect(mouseX, mouseY, 50, 50);
+  stroke(255);
+  strokeWeight(10);
+  smooth();
+
+  if (mouseIsPressed === true) {
+    line(mouseX, mouseY, pmouseX, pmouseY);
+  }
+
 }
 
 function windowResized() {
