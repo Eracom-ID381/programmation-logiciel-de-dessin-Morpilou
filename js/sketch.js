@@ -1,18 +1,52 @@
+let hue;
+let size = 10;
+
+
 function setup() {
-  createCanvas(windowWidth, windowWidth);
+  createCanvas(windowWidth, windowHeight);
   background(0);
   noStroke();
+  hue = 0;
 }
 
 function draw() {
-  stroke(255);
-  strokeWeight(10);
-  smooth();
 
-  if (mouseIsPressed === true) {
-    line(mouseX, mouseY, pmouseX, pmouseY);
+
+  let key = keyCode;
+  switch (key) {
+    case 71: // key G (for 'gomme')
+      strokeWeight(size);
+      stroke(0); // Red color
+      if (mouseIsPressed === true) {
+        point(mouseX, mouseY);
+      }
+      break;
+    default:
+      // Rainbow dots
+      strokeWeight(size);
+      colorMode(HSL, 360);
+      stroke(hue, 200, 200); // Red color
+
+      // Draw dots if the moise is pressed
+      if (mouseIsPressed === true) {
+        if (hue > 360) {
+          hue = 0;
+        } else {
+          hue++;
+        }
+        point(mouseX, mouseY);
+      }
   }
 
+}
+
+// scroll up grows the size of the point, scroll down reduces the size of the point
+function mouseWheel(event) {
+  if (event.deltaY > 0) {
+    size = size - 10;
+  } else {
+    size = size + 10;
+  }
 }
 
 function windowResized() {

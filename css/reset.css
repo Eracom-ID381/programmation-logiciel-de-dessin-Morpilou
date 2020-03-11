@@ -24,7 +24,7 @@ html {
  */
 ::-moz-selection {
   background: #b3d4fc;
-  text-shadow: none;
+  tex     t-shadow: none;
 }
 
 ::selection {
