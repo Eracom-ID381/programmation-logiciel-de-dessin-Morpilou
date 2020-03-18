@@ -2,11 +2,13 @@ let hue;
 let size = 10;
 
 
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   noStroke();
   background(0);
   hue = 0;
+
 }
 
 function draw() {
@@ -17,9 +19,9 @@ function draw() {
   switch (key) {
     case 69: // key E (for 'eraser')
       strokeWeight(size);
-      stroke(0); // Red color
+      stroke(0); // black color
       if (mouseIsPressed === true) {
-        point(mouseX, mouseY);
+        line(mouseX, mouseY, pmouseX, pmouseY)
       }
       break;
     case 67: // key C (for 'clear')
@@ -29,21 +31,25 @@ function draw() {
       keyCode = 0;
 
       break;
-    default:
-      // Rainbow dots
-      strokeWeight(size);
-      colorMode(HSL, 360);
-      stroke(hue, 200, 200); // Red color
+    case 76: // key L (for 'line')
 
-      // Draw dots if the moise is pressed
       if (mouseIsPressed === true) {
-        if (hue > 360) {
-          hue = 0;
-        } else {
-          hue++;
-        }
-        point(mouseX, mouseY);
+        rainbow(line(mouseX, mouseY, pmouseX, pmouseY));
       }
+
+      break;
+    case 82: // key R (for 'rectangle')
+
+      if (mouseIsPressed === true) {
+        rainbow(rect(mouseX, mouseY, 55, 55));
+      }
+
+      break;
+    default:
+      if (mouseIsPressed === true) {
+        rainbow(point(mouseX, mouseY));
+      }
+
   }
 
 }
@@ -54,6 +60,43 @@ function mouseWheel(event) {
     size = size - 10;
   } else {
     size = size + 10;
+  }
+}
+
+
+function rainbow(brush) {
+  // Rainbow dots
+  strokeWeight(size);
+  colorMode(HSL, 360);
+  stroke(hue, 200, 200); // Red color
+  fill(hue, 200, 200); // Red color
+
+  // change the hue of the brush
+  if (hue > 360) {
+    hue = 0;
+  } else {
+    hue++;
+  }
+  brush;
+}
+
+// preload the song
+function preload() {
+  song = loadSound('song/rick-astley-never-gonna-give-you-up-video.mp3');
+}
+
+
+function mousePressed() {
+  if (!song.isPlaying()) {
+    // .isPlaying() returns a boolean
+    song.play(); // .play() will resume from .pause() position
+  }
+}
+
+function mouseReleased() {
+  if (song.isPlaying()) {
+    // .isPlaying() returns a boolean
+    song.pause(); // .play() will resume from .pause() position
   }
 }
 
