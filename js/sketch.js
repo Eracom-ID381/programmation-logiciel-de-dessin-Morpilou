@@ -1,6 +1,6 @@
 let hue;
 let size = 10;
-
+let button;
 
 
 function setup() {
@@ -8,6 +8,9 @@ function setup() {
   noStroke();
   background(0);
   hue = 0;
+  button = createButton('help');
+  button.position(19, 19);
+  button.mousePressed(help);
 
 }
 
@@ -80,23 +83,35 @@ function rainbow(brush) {
   brush;
 }
 
+function help() {
+  textSize(32);
+  noStroke();
+  text('word', 10, 30);
+  fill(0, 102, 153);
+  text('word', 10, 60);
+  fill(0, 102, 153, 51);
+  text('word', 10, 90);
+}
+
 // preload the song
 function preload() {
   song = loadSound('song/rick-astley-never-gonna-give-you-up-video.mp3');
 }
 
 
+// when mouse is pressed
 function mousePressed() {
+  // if the song is not playing
   if (!song.isPlaying()) {
-    // .isPlaying() returns a boolean
-    song.play(); // .play() will resume from .pause() position
+    song.play(); // play the song
   }
 }
 
+// when mouse is released
 function mouseReleased() {
+  // if the song is playing
   if (song.isPlaying()) {
-    // .isPlaying() returns a boolean
-    song.pause(); // .play() will resume from .pause() position
+    song.pause(); // pause the song
   }
 }
 
