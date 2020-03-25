@@ -2,16 +2,11 @@ let hue;
 let size = 10;
 let button;
 
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   noStroke();
   background(0);
   hue = 0;
-  button = createButton('help');
-  button.position(19, 19);
-  button.mousePressed(help);
-
 }
 
 function draw() {
@@ -34,14 +29,14 @@ function draw() {
       keyCode = 0;
 
       break;
-    case 76: // key L (for 'line')
+    case 49: // key 1 (line)
 
       if (mouseIsPressed === true) {
         rainbow(line(mouseX, mouseY, pmouseX, pmouseY));
       }
 
       break;
-    case 82: // key R (for 'rectangle')
+    case 50: // key 2 (square)
 
       if (mouseIsPressed === true) {
         rainbow(rect(mouseX, mouseY, 55, 55));
@@ -51,6 +46,7 @@ function draw() {
     default:
       if (mouseIsPressed === true) {
         rainbow(point(mouseX, mouseY));
+
       }
 
   }
@@ -84,14 +80,12 @@ function rainbow(brush) {
 }
 
 function help() {
-  textSize(32);
-  noStroke();
-  text('word', 10, 30);
-  fill(0, 102, 153);
-  text('word', 10, 60);
-  fill(0, 102, 153, 51);
-  text('word', 10, 90);
+  document.getElementById("text").classList.toggle("text-none");
 }
+
+
+
+
 
 // preload the song
 function preload() {
